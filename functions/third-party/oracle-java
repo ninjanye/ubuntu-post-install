@@ -9,12 +9,10 @@ function oracle-java {
 	# Update repository information
 	show_info 'Updating repository information...'
 	sudo apt-get update -qq -y
-    show_success 'Done.'
+  show_success 'Done.'
 	# Install
 	show_info 'Installing Oracle Java 8...'
 	sudo apt-get install -y -qq oracle-java8-installer
-    # Done
-    show_success 'Done.'
-    whiptail --title "Finished" --msgbox "Installation complete." 8 78
-	thirdparty
+  # Done
+  show_success 'Done.'
 }

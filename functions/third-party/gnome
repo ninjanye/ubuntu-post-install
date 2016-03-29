@@ -2,20 +2,14 @@
 
 # GNOME
 function gnome {
-    # Add repository
-    show_info 'Adding GNOME3 PPA to software sources...'
-    show_warning 'Requires root privileges'
-    sudo add-apt-repository -y ppa:gnome3-team/gnome3
+  show_info 'Installing GNOME Desktop...'
+  # Add repository
+  show_warning 'Requires root privileges'
+  sudo add-apt-repository -y ppa:gnome3-team/gnome3
 	# Update repository information
-	show_info 'Updating repository information...'
 	sudo apt-get update -qq -y
-    show_success 'Done.'
 	# Install
-    echo 'Installing GNOME Desktop...'
-    show_warning 'Requires root privileges'
-    sudo apt-get install -y -qq fonts-cantarell gnome-shell gnome-shell-extensions gnome-session gnome-terminal nautilus
-    # Done
-    show_success 'Done.'
-    whiptail --title "Finished" --msgbox "Installation complete." 8 78
-	thirdparty
+  sudo apt-get install -y -qq fonts-cantarell gnome-shell gnome-shell-extensions gnome-session gnome-terminal nautilus
+  # Done
+  show_success 'Installing GNOME Desktop: COMPLETE'
 }

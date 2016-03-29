@@ -1,25 +1,21 @@
 #!/bin/bash
 
 dir="$(dirname "$0")"
-
 FAVS="$dir/data/favourites.list"
 
 # Install Favourite Applications
 function favourites {
-    if (eval `resize` && whiptail \
-        --title "Favourite Applications" \
-        --yesno "Current list of favourite applications to install: \n\n$(cat $FAVS) \n\nProceed with installation?" \
-        $LINES $COLUMNS $(( $LINES - 12 )) \
-        --scrolltext ) then
-        show_info 'Installing...'
-        show_warning 'Requires root privileges'
-        # Feel free to change the contents of 'favourites.list' in the data folder to whatever suits your preference.
-        sudo apt-get install -y -qq --no-install-recommends $(cat $FAVS)
-        # Done
-        show_success 'Done.'
-        whiptail --title "Finished" --msgbox "Installation complete." 8 78
-        main
+  show_info "Installing Favourites"
+  for package in $(cat $FAVS)
+  do
+    PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $package|grep "install ok installed")
+    if [ "" == "$PKGCHECK" ]; then
+        show_info "Installing '$package'."
+        sudo apt-get install -y -qq --no-install-recommends $package
+        show_success 'Installing '$package': COMPLETE'
     else
-        clear && main
+        show_info "'$package' is already installed"
     fi
+  done
+  show_success "Installing Favourites: COMPLETE."
 }
