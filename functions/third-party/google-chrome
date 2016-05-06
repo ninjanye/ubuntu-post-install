@@ -3,7 +3,7 @@
 # Google Chrome
 function google-chrome {
   show_info 'Installing Google Chrome...'
-  REPO_CHECK=$(dpkg-query -W --showformat='${Status}\n' atom|grep "install ok installed")
+  REPO_CHECK=$(dpkg-query -W --showformat='${Status}\n' google-chrome-stable | grep "install ok installed")
 	if [ "" == "$REPO_CHECK" ]; then
     # Download Debian file that matches system architecture
     case `uname -i` in
